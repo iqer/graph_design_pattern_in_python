@@ -8,10 +8,13 @@ class Book:
     
 class BookShelf:
     def __init__(self, capacity) -> None:
+        self._capacity = capacity
         self._books = [None] * capacity
         self._last = 0
 
     def add_book(self, book):
+        if self._capacity == self._last + 1:
+            self._books = self._books + [None] * self._capacity
         self._books[self._last] = book
         self._last += 1
 
@@ -47,6 +50,7 @@ if  __name__ == '__main__':
     book_shelf.add_book(Book('banana'))
     book_shelf.add_book(Book('cat'))
     book_shelf.add_book(Book('damn'))
+    book_shelf.add_book(Book('english'))
     it = book_shelf.iterator()
     while it.has_next():
         print(it.next().get_name())
